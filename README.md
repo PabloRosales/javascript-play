@@ -1,4 +1,4 @@
-javascript-play
+Javascript Play
 ===============
 
-Just playing with javascript
+Just playing with javascript.
