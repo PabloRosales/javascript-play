@@ -1,40 +1,31 @@
-/**
- * Playing with "this" #2
- */
+test('Playing with this #2', function() {
 
-(function() {
+    (function() {
 
-    function hi() {
-        console.log(this + ' says hi');
-    }
+        function hi() {
+            return this;
+        }
 
-    // this is window
-    hi();
+        ok(hi().toString() === '[object Window]', 'Is window');
+        ok(hi.call(window).toString() === '[object Window]', 'Is window');
+        // Without strict mode our string is boxed into an object
+        ok(hi.call('Javascript').toString() === 'Javascript', 'Is Javascript');
 
-    // this is window
-    hi.call(window);
+    }());
 
-    // this is Javascript
-    hi.call('Javascript');
+    (function() {
 
-}());
+        'use strict';
 
-// Now with strict
-(function() {
+        function hi() {
+            return this;
+        }
 
-    'use strict';
+        ok(typeof hi() === 'undefined', 'Is undefined');
+        ok(hi.call(window).toString() === '[object Window]', 'Is window');
+        // In strict mode, our string is not boxed into an object
+        ok(hi.call('Javascript') === 'Javascript', 'Is Javascript');
 
-    function hi() {
-        console.log(this + ' says hi');
-    }
+    }());
 
-    // this is undefined
-    hi();
-
-    // this is window
-    hi.call(window);
-
-    // this is Javascript
-    hi.call('Javascript');
-
-}());
+});

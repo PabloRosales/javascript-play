@@ -1,43 +1,33 @@
-/**
- * Playing with "this" #1
- */
+var that = this;
 
-// this is window
-console.log('[object Window] === ' + this);
+test('Playing with this #1', function() {
 
-// this is undefined
-(function() {
-   'use strict';
-    console.log('undefined === ' + this);
-}());
+    ok('[object Window]' === that.toString(), 'Is window');
 
-// this is undefined
-(function() {
-    'use strict';
-    console.log('undefined === ' + this);
-})();
-
-// this is undefined
-(function() {
-    'use strict';
     (function() {
-        console.log('undefined === ' + this);
+        'use strict';
+        ok(typeof this === 'undefined', 'Is undefined');
     }());
-})();
 
-// this is window
-(function() {
-    console.log('[object Window] === ' + this);
-}());
-
-// this is window
-(function() {
-    console.log('[object Window] === ' + this);
-})();
-
-// this is window
-(function() {
     (function() {
-        console.log('[object Window] === ' + this);
+        'use strict';
+        (function() {
+            ok(typeof this === 'undefined', 'Is undefined');
+        }());
+    })();
+
+    (function() {
+        ok('[object Window]' === this.toString(), 'Is window');
     }());
-}());
+
+    (function() {
+        ok('[object Window]' === this.toString(), 'Is window');
+    })();
+
+    (function() {
+        (function() {
+            ok('[object Window]' === this.toString(), 'Is window');
+        }());
+    }());
+
+});
