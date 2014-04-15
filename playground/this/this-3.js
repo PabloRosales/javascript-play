@@ -1,24 +1,20 @@
-/**
- * Playing with "this" #3
- */
+test('Playing with this #3', function() {
 
-var pet = {
-    talk: function(sound) {
-        console.log(this + ' says ' + sound);
-    }
-};
+    var pet = {
+        talk: function() {
+            return this;
+        }
+    };
 
-// this is object pet
-pet.talk('woof');
+    ok('[object Object]' === pet.talk().toString(), 'Is object');
 
-var talk_louder = function(sound) {
-    console.log(this + ' says ' + sound + '!');
-};
+    var talk = function () {
+        return this;
+    };
 
-pet.talk = talk_louder;
+    pet.talk = talk;
 
-// this is object pet
-pet.talk('woof');
+    ok('[object Object]' === pet.talk('woof').toString(), 'Is object');
+    ok('[object Window]' === talk('popup').toString(), 'Is Window');
 
-// this is window
-talk_louder('popup');
+});
