@@ -20,7 +20,7 @@ test('No JQuery #3 (get item)', function() {
     var first_1 = items.item(1);
     var first_2 = items[1];
 
-    ok(first_1.innerText === 'Second item');
-    ok(first_2.innerText === 'Second item');
+    ok(first_1.textContent === 'Second item');
+    ok(first_2.textContent === 'Second item');
 
 });

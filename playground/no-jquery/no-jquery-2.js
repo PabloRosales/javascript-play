@@ -24,7 +24,7 @@ test('No JQuery #2 (each)', function() {
     var nodes = document.querySelectorAll('.list-item');
 
     [].forEach.call(nodes, function(v, i) {
-        values.push(v.innerText);
+        values.push(v.textContent);
     });
 
     ok(values.length === expected.length, 'No JQuery same length');
