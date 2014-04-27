@@ -1,4 +1,4 @@
-test('Design Patterns #3 (Mixin)', function() {
+test('Design Patterns #4 (Mixin)', function() {
 
     function extend(destination, source) {
         for (var property in source) {
