@@ -16,6 +16,7 @@ test('Javascript gotchas #1 (Global namespace)', function() {
 
     ok('Original function' === first(), 'Original function');
     ok('Overridden function' === first_override(), 'Overridden function');
+    ok('Overridden function' === first(), 'Original function (overridden)');
     ok('Second function' === second(), 'Second function');
 
 });
