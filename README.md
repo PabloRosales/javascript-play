@@ -10,3 +10,29 @@ This are some of the things included:
 * JQuery vs No JQuery
 * Javascript Gotchas
 * Javascript Design Patterns
+
+JQuery vs No JQuery
+-------------------
+
+1. Query selectors
+2. Each
+3. Getting items from a query
+4. Matches (*Is* in JQuery)
+
+Gotchas
+-------
+
+1. Global namespace
+2. Global namespace, module pattern
+3. Hoisting
+4. *var* in for loops
+5. Implicit coercions
+
+Design Patterns
+---------------
+
+1. Functional arguments
+2. Chaining
+3. Inheritance with Object.create
+4. Mixin
+5. Observable properties
