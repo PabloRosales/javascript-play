@@ -28,12 +28,12 @@ test('Javascript gotchas #5 (implicit coercions)', function() {
         strictEqual(NaN === x, false); // NaN is the only one that is unequal to itself
 
         strictEqual(isNaN(NaN), true);
-        strictEqual(isNaN("one"),  true);
-        strictEqual(isNaN(undefined),  true);
-        strictEqual(isNaN({}),  true);
+        strictEqual(isNaN("one"), true);
+        strictEqual(isNaN(undefined), true);
+        strictEqual(isNaN({}), true);
 
-        strictEqual(isNaN(null),  false);
-        strictEqual(isNaN(""),  false);
+        strictEqual(isNaN(null), false);
+        strictEqual(isNaN(""), false);
         strictEqual(isNaN([]), false);
 
     }());
