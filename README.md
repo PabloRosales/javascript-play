@@ -28,6 +28,7 @@ Gotchas
 4. *var* in for loops
 5. Implicit coercions
 5. == operator
+5. Semicolons
 
 Design Patterns
 ---------------
