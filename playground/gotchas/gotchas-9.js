@@ -1,5 +1,7 @@
 test('Javascript gotchas #9 (IIFE: immediately-invoked function expression)', function() {
 
+    // http://toddmotto.com/what-function-window-document-undefined-iife-really-means/
+
     (function (window, document, undefined) {
         // the undefined parameter avoids the problem of someone changing the undefined value in non strict mode
         strictEqual(undefined, undefined);
