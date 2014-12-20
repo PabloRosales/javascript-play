@@ -27,8 +27,10 @@ Gotchas
 3. Hoisting
 4. *var* in for loops
 5. Implicit coercions
-5. == operator
-5. Semicolons
+6. == operator
+7. Semicolons
+8. || for default values
+
 
 Design Patterns
 ---------------
