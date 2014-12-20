@@ -30,6 +30,7 @@ Gotchas
 6. == operator
 7. Semicolons
 8. || for default values
+9. IIFE: immediately-invoked function expression
 
 
 Design Patterns
