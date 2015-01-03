@@ -47,26 +47,64 @@
         }
 
         var some = 'Some text';
-        strictEqual(p(), '<p></p>');
-        strictEqual(p(some), '<p>Some text</p>');
-        strictEqual(p(0), '<p>0</p>');
-        strictEqual(p({toString: R.always(some)}), '<p>Some text</p>');
-        strictEqual(p(strong(some)), '<p><strong>Some text</strong></p>');
-        strictEqual(html(p, strong), '<p><strong></strong></p>');
-        strictEqual(html(p, br, strong, R.always(some)), '<p><br/><strong>Some text</strong></p>');
-        strictEqual(html(p, strong, R.always(some)), '<p><strong>Some text</strong></p>');
-        strictEqual(html(div, p, strong, R.always(some)), '<div><p><strong>Some text</strong></p></div>');
-        strictEqual(html(ul, li, R.always(some)), '<ul><li>Some text</li></ul>');
-        strictEqual(list([some, some]), '<li>Some text</li><li>Some text</li>');
-        strictEqual(html(ul, R.always(list([some, some]))), '<ul><li>Some text</li><li>Some text</li></ul>');
+        strictEqual(
+            p(),
+            '<p></p>'
+        );
+        strictEqual(
+            p(some),
+            '<p>Some text</p>'
+        );
+        strictEqual(
+            p(0),
+            '<p>0</p>'
+        );
+        strictEqual(
+            p({toString: R.always(some)}),
+            '<p>Some text</p>'
+        );
+        strictEqual(
+            p(strong(some)),
+            '<p><strong>Some text</strong></p>'
+        );
+        strictEqual(
+            html(p, strong),
+            '<p><strong></strong></p>'
+        );
+        strictEqual(
+            html(p, br, strong, R.always(some)),
+            '<p><br/><strong>Some text</strong></p>'
+        );
+        strictEqual(
+            html(p, strong, R.always(some)),
+            '<p><strong>Some text</strong></p>'
+        );
+        strictEqual(
+            html(div, p, strong, R.always(some)),
+            '<div><p><strong>Some text</strong></p></div>'
+        );
+        strictEqual(
+            html(ul, li, R.always(some)),
+            '<ul><li>Some text</li></ul>'
+        );
+        strictEqual(
+            list([some, some]),
+            '<li>Some text</li><li>Some text</li>'
+        );
+        strictEqual(
+            html(ul, R.always(list([some, some]))),
+            '<ul><li>Some text</li><li>Some text</li></ul>'
+        );
 
         var todo = [
             'Buy book',
             'Read book',
             'Practice new ideas'
         ];
-        var todo_list = html(div, ul, R.always(list(todo)));
-        strictEqual(todo_list, '<div><ul><li>Buy book</li><li>Read book</li><li>Practice new ideas</li></ul></div>');
+        strictEqual(
+            html(div, ul, R.always(list(todo))),
+            '<div><ul><li>Buy book</li><li>Read book</li><li>Practice new ideas</li></ul></div>'
+        );
 
     });
 
