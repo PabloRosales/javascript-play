@@ -10,6 +10,8 @@ This are some of the things included:
 * JQuery vs No JQuery
 * Javascript Gotchas
 * Javascript Design Patterns
+* HTML generation
+* ToDo list
 
 JQuery vs No JQuery
 -------------------
@@ -41,3 +43,13 @@ Design Patterns
 3. Inheritance with Object.create
 4. Mixin
 5. Observable properties
+
+HTML generation
+---------------
+
+Playing a little with functional programming ideas to generate HTML.
+
+ToDo List
+---------
+
+Playing a little with functional programming ideas to edit a to do list.
