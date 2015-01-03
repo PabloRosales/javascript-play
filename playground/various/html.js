@@ -4,6 +4,25 @@
 
     test('HTML (playing to generate HTML)', function() {
 
+        function wrapStr(a, b) {
+            return function(s) {
+                return a + s + b;
+            }
+        }
+
+        function catStr(s) {
+            return R.join('')(s);
+        }
+
+        var tagOpen = wrapStr('<', '>');
+        var tagClose = wrapStr('</', '>');
+
+        function tag(t) {
+            return function(str) {
+                return wrapStr(tagOpen(t), tagClose(t))(text(str));
+            }
+        }
+
         function exists(value) {
             return value != null;
         }
@@ -17,12 +36,6 @@
             return '<br/>' + text(str);
         }
 
-        function tag(t) {
-            return function(str) {
-                return '<' + t + '>' + text(str) + '</' + t + '>';
-            }
-        }
-
         var div = tag('div');
         var p = tag('p');
         var strong = tag('strong');
@@ -30,8 +43,7 @@
         var li = tag('li');
 
         function list(l) {
-            var j = R.join('');
-            return j(R.map(li, l));
+            return catStr(R.map(li, l));
         }
 
         function html() {
