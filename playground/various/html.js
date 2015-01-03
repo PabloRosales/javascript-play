@@ -21,21 +21,16 @@
             return '<br/>' + text(str);
         }
 
-        function p(str) {
-            return '<p>' + text(str) + '</p>';
+        function tag(t) {
+            return function(str) {
+                return '<' + t + '>' + text(str) + '</' + t + '>';
+            }
         }
 
-        function strong(str) {
-            return '<strong>' + text(str) + '</strong>';
-        }
-
-        function ul(str) {
-            return '<ul>' + text(str) + '</ul>';
-        }
-
-        function li(str) {
-            return '<li>' + text(str) + '</li>';
-        }
+        var p = tag('p');
+        var strong = tag('strong');
+        var ul = tag('ul');
+        var li = tag('li');
 
         function list(l) {
             var j = R.join('');
