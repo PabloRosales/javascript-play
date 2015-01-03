@@ -13,10 +13,6 @@
             return '';
         }
 
-        function div(str) {
-            return '<div>' + text(str) + '</div>';
-        }
-
         function br(str) {
             return '<br/>' + text(str);
         }
@@ -27,6 +23,7 @@
             }
         }
 
+        var div = tag('div');
         var p = tag('p');
         var strong = tag('strong');
         var ul = tag('ul');
