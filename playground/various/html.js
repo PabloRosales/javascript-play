@@ -16,10 +16,19 @@
         var tagClose = wrapStr('</', '>');
 
         function tag(t) {
-            return function(str) {
-                return wrapStr(tagOpen(t), tagClose(t), text(str));
+            return function() {
+                var str = R.last(arguments);
+                var attrs = R.take(arguments.length - 1, arguments);
+                return wrapStr(tagOpen(R.join(' ', R.concat([t], attrs))), tagClose(t), text(str));
             }
         }
+
+        var attr = R.curry(function(name, value) {
+            return name + '="' + value + '"';
+        });
+
+        var cssClass = attr('class');
+        var href = attr('href');
 
         function exists(value) {
             return value != null;
@@ -35,18 +44,23 @@
         }
 
         var div = tag('div');
+        var h1 = tag('h1');
         var p = tag('p');
         var strong = tag('strong');
         var ul = tag('ul');
         var li = tag('li');
+        var a = tag('a');
 
         function list(l) {
             return catStr(R.map(li, l));
         }
 
-        function html() {
-            return R.apply(R.compose, arguments)();
-        }
+        var html = function() {
+            var args = arguments;
+            return function(str) {
+                return R.apply(R.compose, args)(str);
+            }
+        };
 
         var some = 'Some text';
         strictEqual(
@@ -70,23 +84,23 @@
             '<p><strong>Some text</strong></p>'
         );
         strictEqual(
-            html(p, strong),
+            html(p, strong)(),
             '<p><strong></strong></p>'
         );
         strictEqual(
-            html(p, br, strong, R.always(some)),
+            html(p, br, strong)(some),
             '<p><br/><strong>Some text</strong></p>'
         );
         strictEqual(
-            html(p, strong, R.always(some)),
+            html(p, strong)(some),
             '<p><strong>Some text</strong></p>'
         );
         strictEqual(
-            html(div, p, strong, R.always(some)),
+            html(div, p, strong)(some),
             '<div><p><strong>Some text</strong></p></div>'
         );
         strictEqual(
-            html(ul, li, R.always(some)),
+            html(ul, li)(some),
             '<ul><li>Some text</li></ul>'
         );
         strictEqual(
@@ -94,8 +108,16 @@
             '<li>Some text</li><li>Some text</li>'
         );
         strictEqual(
-            html(ul, R.always(list([some, some]))),
+            html(ul)(list([some, some])),
             '<ul><li>Some text</li><li>Some text</li></ul>'
+        );
+        strictEqual(
+            p(cssClass('alert'), some),
+            '<p class="alert">Some text</p>'
+        );
+        strictEqual(
+            a(cssClass('btn btn-default'), href('http://example.com'), some),
+            '<a class="btn btn-default" href="http://example.com">Some text</a>'
         );
 
         var todo = [
@@ -104,9 +126,25 @@
             'Practice new ideas'
         ];
         strictEqual(
-            html(div, ul, R.always(list(todo))),
+            html(div, ul)(list(todo)),
             '<div><ul><li>Buy book</li><li>Read book</li><li>Practice new ideas</li></ul></div>'
         );
+
+        var header = html(R.curry(function(x) { return div(cssClass('header'), x); }), h1);
+
+        strictEqual(
+            header(some),
+            '<div class="header"><h1>Some text</h1></div>'
+        ) ;
+
+        strictEqual(
+            header(
+                a(href('http://example.com'),
+                    strong(some)
+                )
+            ),
+            '<div class="header"><h1><a href="http://example.com"><strong>Some text</strong></a></h1></div>'
+        )
 
     });
 
