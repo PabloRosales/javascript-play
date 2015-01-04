@@ -11,18 +11,33 @@
             }
         }
 
+        /**
+         * Returns a function that appends a value to a list
+         * @param v
+         * @returns {Function}
+         */
         function add(v) {
             return function(l) {
                 return R.append(v, l);
             }
         }
 
+        /**
+         * Returns a function that pops the first matching value on a list
+         * @param v
+         * @returns {Function}
+         */
         function pop(v) {
             return function(l) {
                 return R.remove(R.findIndex(function(x) { return x === v; }, l), 1, l);
             }
         }
 
+        /**
+         * Returns a function that removes (rejects) all values matching on a list
+         * @param v
+         * @returns {Function}
+         */
         function remove(v) {
             return function(l) {
                 return R.reject(function(x) { return x === v; }, l);
