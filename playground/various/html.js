@@ -4,14 +4,12 @@
 
     test('HTML (playing to generate HTML)', function() {
 
-        function wrapStr(a, b) {
-            return function(s) {
-                return a + s + b;
-            }
-        }
+        var wrapStr = R.curry(function (a, b, s) {
+            return a + s + b;
+        });
 
         function catStr(s) {
-            return R.join('')(s);
+            return R.join('', s);
         }
 
         var tagOpen = wrapStr('<', '>');
@@ -19,7 +17,7 @@
 
         function tag(t) {
             return function(str) {
-                return wrapStr(tagOpen(t), tagClose(t))(text(str));
+                return wrapStr(tagOpen(t), tagClose(t), text(str));
             }
         }
 
