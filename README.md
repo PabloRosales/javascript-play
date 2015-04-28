@@ -12,6 +12,7 @@ This are some of the things included:
 * Javascript Design Patterns
 * HTML generation
 * ToDo list
+* Artificial Intelligence
 
 JQuery vs No JQuery
 -------------------
@@ -53,3 +54,8 @@ ToDo List
 ---------
 
 Playing a little with functional programming ideas to edit a to do list.
+
+Artificial Intelligence
+-----------------------
+
+Playing a little with language, relations, etc.
