@@ -10,6 +10,8 @@
             'apple',
             'fruit',
             'red',
+            'yellow',
+            'green',
             'sweet',
             'small'
         ],
@@ -32,10 +34,35 @@
             'brown'
         ],
         [
+            'spider',
+            'big',
+            'insect'
+        ],
+        [
             'bee',
             'small',
             'insect',
             'honey'
+        ],
+        [
+            'ant',
+            'small',
+            'insect'
+        ],
+        [
+            'lion',
+            'medium',
+            'mammal'
+        ],
+        [
+            'fire',
+            'red',
+            'hot'
+        ],
+        [
+            'grass',
+            'green',
+            'plant'
         ],
         [
             'small',
@@ -46,8 +73,16 @@
             'size'
         ],
         [
+            'big',
+            'size'
+        ],
+        [
             'fruit',
             'food'
+        ],
+        [
+            'sweet',
+            'taste'
         ],
         [
             'vegetable',
@@ -56,6 +91,22 @@
         [
             'insect',
             'animal'
+        ],
+        [
+            'mammal',
+            'animal'
+        ],
+        [
+            'red',
+            'color'
+        ],
+        [
+            'yellow',
+            'color'
+        ],
+        [
+            'green',
+            'color'
         ]
     ];
 
@@ -71,13 +122,19 @@
         return e;
     }
 
-    function p(l, f) {
+    function p(l, f, message) {
         var c = R.call(f, l);
-        console.log(R.join(', ', l), R.map(function(v) { return v.name; }, c));
+        console.log(
+            f.name,
+            R.join(', ', l),
+            R.map(function(v) { return R.path('name', v) || v; }, c),
+            message || ''
+        );
+        return c;
     }
 
     function relations(_relations) {
-        return R.map(function(v) { return { relations: new RegExp(v) }; }, _relations);
+        return R.map(function(v) { return { relations: v }; }, _relations);
     }
 
     function and(_relations) {
@@ -92,20 +149,67 @@
         return v[attr];
     });
 
+    var name = extract('name');
+
     function find_with_attribute(attr) {
-        return R.compose(
-            or,
-            R.map(extract('name')),
+
+        var attributes = R.compose(
+            R.map(name),
             and
         )(attr);
+
+        return or(attributes);
     }
 
-    p(['size'], and);
-    p(['food'], and);
-    p(['fruit', 'red'], and);
-    p(['fruit', 'red', 'small'], and);
-    p(['size'], find_with_attribute);
-    p(['food'], find_with_attribute);
-    p(['animal'], find_with_attribute);
+    function find_similar(related) {
+
+        var attributes = col.find({
+            $and: R.map(function (v) {
+                return {name: new RegExp('^' + v + '$')};
+            }, related)
+        });
+
+        if (R.isEmpty(attributes)) { return []; }
+
+        var search = R.foldl(
+            function(acc, val) { return R.concat(extract('relations', val), acc); },
+            [],
+            attributes
+        );
+
+        return or(search);
+
+    }
+
+    function find_related(v) { return R.compose(or, R.map(name), find_similar)(v); }
+
+    // Examples:
+
+    p(['size'], and, 'Are sizes');
+    p(['food'], and, 'Are foods');
+    p(['fruit', 'red'], and, 'Are fruits and red');
+    p(['fruit', 'red', 'small'], and, 'Are fruits, red and small');
+    p(['red', 'green'], or, 'Are red or green');
+
+    p(['size'], find_with_attribute, 'All have size');
+    p(['food'], find_with_attribute, 'All are foods');
+    p(['animal'], find_with_attribute, 'All are animals');
+    p(['color'], find_with_attribute, 'All have color');
+
+    p(['red'], find_similar, 'List of things with same attribute than red as color');
+    p(['ant'], find_similar, 'List of things with same attributes that ant as small and insect');
+    p(['apple'], find_similar, 'List of things with same attributes that apple, as red, yellow, small...');
+
+    p(['red'], and, 'All are red');
+    p(['red'], find_related, 'All have color');
+
+    p(['fruit'], and, 'All are fruits');
+    p(['fruit'], find_related, 'All are food');
+
+    p(['insect'], and, 'All are insect');
+    p(['insect'], find_related, 'All are animals');
+
+    p(['small'], and, 'All are small');
+    p(['small'], find_related, 'All have size');
 
 }());
