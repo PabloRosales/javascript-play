@@ -196,9 +196,9 @@
     p(['animal'], find_with_attribute, 'All are animals');
     p(['color'], find_with_attribute, 'All have color');
 
-    p(['red'], find_similar, 'List of things with same attribute than red as color');
-    p(['ant'], find_similar, 'List of things with same attributes that ant as small and insect');
-    p(['apple'], find_similar, 'List of things with same attributes that apple, as red, yellow, small...');
+    p(['red'], find_similar, 'List of things with same attributes than red like color');
+    p(['ant'], find_similar, 'List of things with same attributes than ant like small and insect');
+    p(['apple'], find_similar, 'List of things with same attributes than apple like red, yellow, small...');
 
     p(['red'], and, 'All are red');
     p(['red'], find_related, 'All have color');
