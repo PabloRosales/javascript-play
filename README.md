@@ -14,6 +14,7 @@ This are some of the things included:
 * Javascript Design Patterns
 * HTML generation
 * ToDo list
+* Processing
 * Artificial Intelligence
 
 JQuery vs No JQuery
