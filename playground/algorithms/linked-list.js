@@ -59,6 +59,47 @@ test('Implement a linked list', function() {
 
         };
 
+        self.toString = function() {
+            var s = '';
+            var current = self.head;
+            while (current !== null && current.next !== null) {
+                s += current.data;
+                current = current.next;
+            }
+            s += current.data;
+            return s;
+        };
+
+        self.order = function() {
+            var current = self.head;
+            while (current !== null && current.next !== null) {
+                if (current.data > current.next.data) {
+                    var c = current.next.data;
+                    current.next.data = current.data;
+                    current.data = c;
+                    // restart from the head
+                    current = self.head;
+                }
+                else {
+                    current = current.next;
+                }
+            }
+        };
+
+        self.unique = function() {
+            self.order();
+            var current = self.head;
+            while (current !== null && current.next !== null) {
+                if (current.data === current.next.data) {
+                    current.next = current.next.next;
+                    current = self.head;
+                }
+                else {
+                    current = current.next;
+                }
+            }
+        };
+
         return self;
 
     };
@@ -75,6 +116,7 @@ test('Implement a linked list', function() {
     strictEqual(ll.insert(3, 5).data, 5);
     strictEqual(ll.insert(3, 4).data, 4);
     strictEqual(ll.find(4).next.data, 5);
+    strictEqual(ll.toString(), '12345');
 
     ll.delete(4);
     strictEqual(ll.find(4), null);
@@ -109,5 +151,44 @@ test('Implement a linked list', function() {
     ll_4.delete(undefined);
 
     strictEqual(ll_4.find(1).next.data, 2);
+    strictEqual(ll_4.toString(), '12');
+
+    // An unordered linked list
+    var ll_5 = new LinkedList(1);
+    ll_5.insert(1, 2);
+    ll_5.insert(2, 3);
+    ll_5.insert(3, 4);
+    ll_5.insert(4, 3);
+    ll_5.insert(3, 2);
+    ll_5.insert(2, 1);
+
+    strictEqual(ll_5.toString(), '1213243');
+
+    ll_5.order();
+
+    strictEqual(ll_5.toString(), '1122334');
+
+    ll_5.unique();
+
+    strictEqual(ll_5.toString(), '1234');
+
+    // An unordered linked list
+    var ll_6 = new LinkedList(5);
+    ll_6.insert(5, 5);
+    ll_6.insert(5, 1);
+    ll_6.insert(1, 4);
+    ll_6.insert(4, 2);
+    ll_6.insert(2, 6);
+    ll_6.insert(6, 1);
+
+    strictEqual(ll_6.toString(), '5142615');
+
+    ll_6.order();
+
+    strictEqual(ll_6.toString(), '1124556');
+
+    ll_6.unique();
+
+    strictEqual(ll_6.toString(), '12456');
 
 });
