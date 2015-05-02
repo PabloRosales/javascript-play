@@ -70,6 +70,7 @@ test('Implement a linked list', function() {
             return s;
         };
 
+        // Implemented without a buffer
         self.order = function() {
             var current = self.head;
             while (current !== null && current.next !== null) {
@@ -86,12 +87,14 @@ test('Implement a linked list', function() {
             }
         };
 
+        // Implemented without a buffer
         self.unique = function() {
             self.order();
             var current = self.head;
             while (current !== null && current.next !== null) {
                 if (current.data === current.next.data) {
                     current.next = current.next.next;
+                    // restart from the head
                     current = self.head;
                 }
                 else {
