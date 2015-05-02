@@ -16,6 +16,7 @@ This are some of the things included:
 * ToDo list
 * Processing
 * Artificial Intelligence
+* Algorithms (and Data Structures)
 
 JQuery vs No JQuery
 -------------------
@@ -62,3 +63,8 @@ Artificial Intelligence
 -----------------------
 
 Playing a little with language, relations, etc.
+
+Algorithms (and Data Structures)
+--------------------------------
+
+Playing a bit with code problems from different books.
