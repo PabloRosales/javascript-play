@@ -1,5 +1,7 @@
 test("Implement a Queue", function() {
 
+    'use strict';
+
     var Queue = function(data) {
 
         var self = this;

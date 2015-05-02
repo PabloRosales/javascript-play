@@ -1,5 +1,7 @@
 test("Implement a Stack", function() {
 
+    'use strict';
+
     var Stack = function(data) {
 
         var self = this;
