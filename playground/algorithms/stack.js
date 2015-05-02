@@ -114,8 +114,8 @@ test("Implement a Stack", function() {
             return stacks[stacks.length - 1].peak();
         };
 
-        self.debug = function() {
-            return stacks;
+        self.size = function() {
+            return stacks.length;
         };
 
     };
@@ -156,15 +156,19 @@ test("Implement a Stack", function() {
     ss_1.push(5);
     ss_1.push(6);
 
+    strictEqual(ss_1.size(), 3);
+
     strictEqual(ss_1.peak(), 6);
     strictEqual(ss_1.pop(), 6);
 
     ss_1.push(6);
     ss_1.push(7);
 
-    strictEqual(ss_1.peak(), 7);
+    strictEqual(ss_1.size(), 4);
 
+    strictEqual(ss_1.peak(), 7);
     strictEqual(ss_1.pop(), 7);
+
     strictEqual(ss_1.pop(), 6);
     strictEqual(ss_1.pop(), 5);
     strictEqual(ss_1.pop(), 4);
@@ -172,6 +176,9 @@ test("Implement a Stack", function() {
     strictEqual(ss_1.pop(), 2);
     strictEqual(ss_1.pop(), 1);
     strictEqual(ss_1.pop(), null);
+    strictEqual(ss_1.pop(), null);
+
+    strictEqual(ss_1.size(), 1);
 
     ss_1.push(1);
     ss_1.push(2);
@@ -184,24 +191,37 @@ test("Implement a Stack", function() {
     ss_1.push(4);
     ss_1.push(5);
     ss_1.push(6);
+    ss_1.push(7);
+    ss_1.push(8);
+
+    strictEqual(ss_1.size(), 5);
+
+    ss_1.pop();
+
+    strictEqual(ss_1.peak(), 7);
+    strictEqual(ss_1.pop(), 7);
 
     strictEqual(ss_1.peak(), 6);
     strictEqual(ss_1.pop(), 6);
+
     strictEqual(ss_1.peak(), 5);
     strictEqual(ss_1.pop(), 5);
+
     strictEqual(ss_1.peak(), 4);
     strictEqual(ss_1.pop(), 4);
+
     strictEqual(ss_1.peak(), 3);
     strictEqual(ss_1.pop(), 3);
+
     strictEqual(ss_1.peak(), 2);
     strictEqual(ss_1.pop(), 2);
 
     ss_1.push(2);
+    ss_1.push(2);
 
+    strictEqual(ss_1.pop(), 2);
     strictEqual(ss_1.pop(), 2);
     strictEqual(ss_1.pop(), 1);
     strictEqual(ss_1.peak(), null);
-    strictEqual(ss_1.pop(), null);
-    strictEqual(ss_1.pop(), null);
 
 });
