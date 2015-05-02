@@ -1,4 +1,4 @@
-test('Implement a linked list', function() {
+test('Implement a Singly Linked List', function() {
 
     'use strict';
 
