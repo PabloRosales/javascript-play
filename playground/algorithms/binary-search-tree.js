@@ -157,7 +157,9 @@ test("Implement a Binary Tree", function() {
     strictEqual(bst_1.min().data, 3);
     strictEqual(bst_1.max().data, 99);
     strictEqual(bst_1.iterativeSearch(3).data, 3);
+    strictEqual(bst_1.recursiveSearch(3).data, 3);
     strictEqual(bst_1.iterativeSearch(100), null);
+    strictEqual(bst_1.recursiveSearch(100), null);
 
     var bst_2 = new BinarySearchTree(50);
     bst_2.insert(40);
@@ -167,6 +169,7 @@ test("Implement a Binary Tree", function() {
     strictEqual(bst_2.max().data, 50);
     strictEqual(bst_2.iterativeSearch(50).data, 50);
     strictEqual(bst_2.recursiveSearch(50).data, 50);
+    strictEqual(bst_2.iterativeSearch(100), null);
     strictEqual(bst_2.recursiveSearch(100), null);
 
     var bst_3 = new BinarySearchTree(12);
@@ -177,6 +180,7 @@ test("Implement a Binary Tree", function() {
 
     strictEqual(bst_3.min().data, 12);
     strictEqual(bst_3.iterativeSearch(15).data, 15);
+    strictEqual(bst_3.recursiveSearch(15).data, 15);
 
     var bst_4 = new BinarySearchTree(15);
     bst_4.insert(20);
@@ -185,6 +189,8 @@ test("Implement a Binary Tree", function() {
     bst_4.insert(16);
 
     strictEqual(bst_4.iterativeSearch(15).data, 15);
+    strictEqual(bst_4.recursiveSearch(15).data, 15);
     strictEqual(bst_4.iterativeSearch(null), null);
+    strictEqual(bst_4.recursiveSearch(null), null);
 
 });
