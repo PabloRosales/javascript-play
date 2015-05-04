@@ -6307,7 +6307,7 @@ module.exports = function(virtHashCode, virtEquals, undef) {
       // different behaviour than Java's. A Java-compatible implementation is
       // provided here.
       var result = [], currSubject = subject, pos;
-      while (((pos = currSubject.search(pattern)) !== -1) && (result.length < (limit - 1))) {
+      while (((pos = currSubject.iterativeSearch(pattern)) !== -1) && (result.length < (limit - 1))) {
         var match = pattern.exec(currSubject).toString();
         result.push(currSubject.substring(0, pos));
         currSubject = currSubject.substring(pos + match.length);
