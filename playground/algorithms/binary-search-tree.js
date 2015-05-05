@@ -7,10 +7,10 @@ test("Implement a Binary Tree", function() {
         var self = this;
         self.root = null;
 
-        function searchIterative(data, current) {
-            if (data == null) return null;
-            while (current != null && current.data !== data) {
-                if (data < current.data) {
+        function searchIterative(d, current) {
+            if (d == null) return null;
+            while (current != null && current.data !== d) {
+                if (d < current.data) {
                     current = current.left;
                 }
                 else {
@@ -20,14 +20,14 @@ test("Implement a Binary Tree", function() {
             return current;
         }
 
-        function searchRecursive(data, node) {
-            if (data == null || node == null) return null;
-            if (node.data === data) return node;
-            if (data < node.data) {
-                return searchRecursive(data, node.left);
+        function searchRecursive(d, node) {
+            if (d == null || node == null) return null;
+            if (node.data === d) return node;
+            if (d < node.data) {
+                return searchRecursive(d, node.left);
             }
             else {
-                return searchRecursive(data, node.right);
+                return searchRecursive(d, node.right);
             }
         }
 
@@ -53,6 +53,46 @@ test("Implement a Binary Tree", function() {
                 internalPostOrder(node.right);
                 console.log(node.data);
             }
+        }
+
+        function internalMin(node) {
+            while (node.left !== null) {
+                node = node.left;
+            }
+            return node;
+        }
+
+        function internalRemove(node, d) {
+
+            if (node === null) {
+                return null;
+            }
+
+            if (d < node.data) {
+                node.left = internalRemove(node.left, d);
+            }
+            else if (d > node.data) {
+                node.right = internalRemove(node.right, d);
+            }
+            else if (node.left !== null && node.right !== null) {
+                node.data = internalMin(node.right).data;
+                node.right = internalRemove(node.data, node.right);
+            }
+            else {
+                node = node.left !== null ? node.left : node.right;
+            }
+
+            return node;
+
+        }
+
+        function internalSize(node) {
+
+            if (node === null) {
+                return 0;
+            }
+            return internalSize(node.left) + 1 + internalSize(node.right);
+
         }
 
         self.insert = function(d) {
@@ -86,20 +126,16 @@ test("Implement a Binary Tree", function() {
 
         };
 
-        self.iterativeSearch = function(data) {
-            return searchIterative(data, self.root);
+        self.iterativeSearch = function(d) {
+            return searchIterative(d, self.root);
         };
 
-        self.recursiveSearch = function(data) {
-            return searchRecursive(data, self.root);
+        self.recursiveSearch = function(d) {
+            return searchRecursive(d, self.root);
         };
 
         self.min = function() {
-            var node = self.root;
-            while (node.left !== null) {
-                node = node.left;
-            }
-            return node;
+            return internalMin(self.root);
         };
 
         self.max = function() {
@@ -110,23 +146,27 @@ test("Implement a Binary Tree", function() {
             return node;
         };
 
-        self.inOrder = function(data) {
-            var start = searchIterative(data || self.root.data, self.root);
+        self.inOrder = function(d) {
+            var start = searchIterative(d || self.root.data, self.root);
             return internalInOrder(start);
         };
 
-        self.preOrder = function(data) {
-            var start = searchIterative(data || self.root.data, self.root);
+        self.preOrder = function(d) {
+            var start = searchIterative(d || self.root.data, self.root);
             return internalPreOrder(start);
         };
 
-        self.postOrder = function(data) {
-            var start = searchIterative(data || self.root.data, self.root);
+        self.postOrder = function(d) {
+            var start = searchIterative(d || self.root.data, self.root);
             return internalPostOrder(start);
         };
 
-        self.remove = function() {
+        self.remove = function(d) {
+            self.root = internalRemove(self.root, d);
+        };
 
+        self.size = function() {
+            return internalSize(self.root);
         };
 
         self.insert(data);
@@ -181,6 +221,32 @@ test("Implement a Binary Tree", function() {
     strictEqual(bst_3.min().data, 12);
     strictEqual(bst_3.iterativeSearch(15).data, 15);
     strictEqual(bst_3.recursiveSearch(15).data, 15);
+
+    strictEqual(bst_3.size(), 5);
+    bst_3.remove(14);
+
+    strictEqual(bst_3.iterativeSearch(14), null);
+
+    strictEqual(bst_3.size(), 4);
+    bst_3.remove(12);
+
+    strictEqual(bst_3.iterativeSearch(12), null);
+
+    strictEqual(bst_3.size(), 3);
+    bst_3.remove(13);
+
+    strictEqual(bst_3.iterativeSearch(13), null);
+
+    strictEqual(bst_3.size(), 2);
+    bst_3.remove(16);
+
+    strictEqual(bst_3.iterativeSearch(16), null);
+
+    strictEqual(bst_3.size(), 1);
+    bst_3.remove(15);
+
+    strictEqual(bst_3.iterativeSearch(15), null);
+    strictEqual(bst_3.size(), 0);
 
     var bst_4 = new BinarySearchTree(15);
     bst_4.insert(20);
