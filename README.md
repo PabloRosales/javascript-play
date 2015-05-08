@@ -17,6 +17,7 @@ This are some of the things included:
 * Processing
 * Artificial Intelligence
 * Algorithms (and Data Structures)
+* Statistics
 
 JQuery vs No JQuery
 -------------------
@@ -68,3 +69,8 @@ Algorithms (and Data Structures)
 --------------------------------
 
 Playing a bit with code problems from different books.
+
+Statistics
+----------
+
+Playing with some statistics from different books.
