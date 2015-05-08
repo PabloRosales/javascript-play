@@ -18,6 +18,7 @@ This are some of the things included:
 * Artificial Intelligence
 * Algorithms (and Data Structures)
 * Statistics
+* Math
 
 JQuery vs No JQuery
 -------------------
@@ -74,3 +75,8 @@ Statistics
 ----------
 
 Playing with some statistics from different books.
+
+Math
+----
+
+Playing with math.
