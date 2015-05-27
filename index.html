@@ -2,22 +2,87 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Javascript playground</title>
+        <title>Javascript Playground</title>
+        <link rel="stylesheet" href="static/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="static/css/style.css"/>
     </head>
     <body>
-        <h1>Javascript playground</h1>
-        <ul>
-            <li><a href="playground/this.html">Playing with this</a></li>
-            <li><a href="playground/gotchas.html">Gotchas</a></li>
-            <li><a href="playground/no-jquery.html">No JQuery</a></li>
-            <li><a href="playground/design-patterns.html">Design Patterns</a></li>
-            <li><a href="playground/html.html">Generating HTML</a></li>
-            <li><a href="playground/todo.html">ToDo list</a></li>
-            <li><a href="playground/functional.html">Functional Programming</a></li>
-            <li><a href="playground/processing.html">Processing</a></li>
-            <li><a href="playground/ai.html">Artificial Intelligence</a></li>
-            <li><a href="playground/algorithms.html">Algorithms (and Data Structures)</a></li>
-            <li><a href="playground/statistics.html">Statistics</a></li>
-        </ul>
+        <div class="container">
+            <div class="page-header">
+                <h1 class="text-center"><small>javascript</small> <strong>Play</strong>ground</h1>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h3>Playing with <strong class="text-italic">this</strong></h3>
+                    <p><a href="playground/this/this-1.html"><code>this</code> with and without <code>use strict</code></a></p>
+                    <p><a href="playground/this/this-2.html"><code>this</code> using <code>call</code></a></p>
+                    <p><a href="playground/this/this-3.html"><code>this</code> in objects</a></p>
+                    <p><a href="playground/this/this-4.html"><code>this</code> using <code>bind</code></a></p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3>JS <strong>Gotchas</strong></h3>
+                    <p><a href="playground/gotchas-1.html">Global Namespace</a></p>
+                    <p><a href="playground/gotchas-2.html">Global Namespace (module pattern)</a></p>
+                    <p><a href="playground/gotchas-3.html">Hoisting</a></p>
+                    <p><a href="playground/gotchas-4.html"><code>var</code> on <code>for</code> loops</a></p>
+                    <p><a href="playground/gotchas-5.html">Implicit coercions</a></p>
+                    <p><a href="playground/gotchas-6.html"><code>==</code> operator</a></p>
+                    <p><a href="playground/gotchas-7.html"><code>;</code> (semicolon)</a></p>
+                    <p><a href="playground/gotchas-8.html"><code>||</code> for default values</a></p>
+                    <p><a href="playground/gotchas-9.html">IIFE: immediately-invoked function expression</a></p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3><strong>NO</strong> <span class="strike">JQuery</span></h3>
+                    <p><a href="playground/no-jquery-1.html">Query Selectors</a></p>
+                    <p><a href="playground/no-jquery-2.html">Each</a></p>
+                    <p><a href="playground/no-jquery-3.html">Get Item</a></p>
+                    <p><a href="playground/no-jquery-4.html">Is</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h3><strong class="text-muted">Design</strong> Patterns</h3>
+                    <p><a href="playground/design-patterns-1.html">Functional <code>arguments</code> Pattern</a></p>
+                    <p><a href="playground/design-patterns-2.html">Chaining</a></p>
+                    <p><a href="playground/design-patterns-3.html">Inheritance with <code>Object.create</code></a></p>
+                    <p><a href="playground/design-patterns-4.html">Mixin</a></p>
+                    <p><a href="playground/design-patterns-5.html">Observable properties</a></p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3><strong>F</strong>(unctional)</h3>
+                    <p><a href="playground/functional-1.html">K Combinator</a></p>
+                    <p><a href="playground/functional-2.html">HTML Generation</a></p>
+                    <p><a href="playground/functional-3.html">ToDo List</a></p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3><strong>Processing</strong></h3>
+                    <p><a href="playground/processing-1.html">Random Walker</a></p>
+                    <p><a href="playground/processing-2.html">Random Number Distribution</a></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center">
+                    <h3>A.Intelligence</h3>
+                    <p><a href="playground/ai-1.html">Things & Relations (in simple lists)</a></p>
+                    <p><a href="playground/ai-2.html">Things & Relations (using ForerunnerDB)</a></p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3>Algorithms <span class="text-muted text-italic">& Data Structures</span></h3>
+                    <p><a href="playground/algo-1.html">Unique Characters</a></p>
+                    <p><a href="playground/algo-2.html">Permutation</a></p>
+                    <p><a href="playground/algo-3.html">Stack</a></p>
+                    <p><a href="playground/algo-4.html">Queue</a></p>
+                    <p><a href="playground/algo-5.html">Linked List</a></p>
+                    <p><a href="playground/algo-6.html">Binary Search Tree</a></p>
+                    <p><a href="playground/algo-7.html">Graph</a></p>
+                </div>
+                <div class="col-md-4 text-center">
+                    <h3><strong>Stat</strong><span class="text-muted">istics</span></h3>
+                    <p><a href="playground/stat-1.html">Mean / Median</a></p>
+                    <p><a href="playground/stat-2.html">Frequency Distribution</a></p>
+                    <p><a href="playground/stat-2.html">Interquartile Range</a></p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -1,0 +1,21 @@
+.text-italic {
+    font-style: italic;
+}
+.strike {
+    text-decoration: line-through;
+}
+.row:first-of-type {
+    border: 0;
+}
+.row {
+    margin-top: 3px;
+    padding-top: 3px;
+    border-top: 1px solid #f8f8f8;
+}
+pre {
+    padding: 2px 4px;
+    font-size: 90%;
+    color: #c7254e;
+    background-color: #f9f2f4;
+    border: none;
+}

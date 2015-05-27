@@ -1,33 +1,21 @@
-var that = this;
+(function($, R, P) {
 
-test('Playing with this #1', function() {
+    'use strict';
 
-    ok('[object Window]' === that.toString(), 'Is window');
+    var code = [
+        ["var that = this", undefined, '<code>that</code> references the window object.'],
+        ["typeof this === 'object'", true, ''],
+        ["typeof that === 'object'", true, ''],
+        ["'[object Window]' === that.toString()", true, ''],
+        ["function THIS() {\n    return typeof this == 'object';\n};\nTHIS();", true, ''],
+        ["(function() {\n    return '[object Window]' === this.toString();\n}())", true, ''],
+        ["(function() {\n    return '[object Window]' === that.toString();\n}())", true, ''],
+        ["(function() {\n    return (function() {\n        return '[object Window]' === this.toString();\n    }());\n }())", true, ''],
+        ["(function() {\n    'use strict';\n    return typeof this === 'undefined';\n}())", true, '<code>use strict</code> makes <code>this</code> to be undefined.'],
+        ["(function() {\n    'use strict';\n    return (function() {\n        return typeof this === 'undefined';\n    }()); \n})()", true, '<code>use strict</code> makes <code>this</code> to be undefined, this applies to all nested scopes.'],
+        ["(function() {\n    'use strict';\n    return '[object Window]' === that.toString();\n}())", true, '<code>that</code> was declared outside this function.']
+    ];
 
-    (function() {
-        'use strict';
-        ok(typeof this === 'undefined', 'Is undefined');
-    }());
+    P.render($('.code'), code);
 
-    (function() {
-        'use strict';
-        (function() {
-            ok(typeof this === 'undefined', 'Is undefined');
-        }());
-    })();
-
-    (function() {
-        ok('[object Window]' === this.toString(), 'Is window');
-    }());
-
-    (function() {
-        ok('[object Window]' === this.toString(), 'Is window');
-    })();
-
-    (function() {
-        (function() {
-            ok('[object Window]' === this.toString(), 'Is window');
-        }());
-    }());
-
-});
+}(jQuery, R, P));
