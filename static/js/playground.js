@@ -53,7 +53,7 @@
             );
             R.forEach(function(value) {
                 var r = row()
-                    .append(col(1, $('<a href="#" class="eval">').text('eval'), 'text-right'))
+                    .append(col(1, $('<a href="#" class="eval" title="See console">').text('eval'), 'text-right'))
                     .append(col(6, code(value[0])))
                     .append(col(2, result(value[1])))
                     .append(col(2, comment(value[2])));
