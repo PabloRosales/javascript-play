@@ -1,4 +1,4 @@
-(function($, R, P) {
+(function($, P) {
 
     'use strict';
 
@@ -18,4 +18,4 @@
 
     P.render($('.code'), code);
 
-}(jQuery, R, P));
+}(jQuery, P));

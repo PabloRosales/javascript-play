@@ -1,20 +1,16 @@
-test('Playing with this #3', function() {
+(function($, P) {
 
-    var pet = {
-        talk: function() {
-            return this;
-        }
-    };
+    'use strict';
 
-    ok('[object Object]' === pet.talk().toString(), 'Is object');
+    var code = [
+        ["var pet = {\n    talk: function() { return this; }\n};", undefined, 'We are using <code>this</code> inside of our <code>talk</code> method.'],
+        ["'[object Object]' === pet.talk().toString()", true, '<code>this</code> points to the pet object.'],
+        ["var talk = function() { return this; }", undefined, 'We are using <code>this</code> inside our <code>talk</code> function.'],
+        ["'[object Window]' === talk().toString()", true, 'Our talk function points to the window object.'],
+        ["pet.talk = talk;\ntypeof pet.talk === 'function' && typeof talk === 'function';", true, 'We now change talk to use our <code>talk</code> function.'],
+        ["'[object Object]' === pet.talk().toString()", true, 'We still point to the pet object.']
+    ];
 
-    var talk = function () {
-        return this;
-    };
+    P.render($('.code'), code);
 
-    pet.talk = talk;
-
-    ok('[object Object]' === pet.talk('woof').toString(), 'Is object');
-    ok('[object Window]' === talk('popup').toString(), 'Is Window');
-
-});
+}(jQuery, P));
