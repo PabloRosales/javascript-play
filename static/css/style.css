@@ -19,3 +19,6 @@ pre {
     background-color: #f9f2f4;
     border: none;
 }
+.no-top-border {
+    border: none !important;
+}
