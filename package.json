@@ -1,0 +1,11 @@
+{
+  "name": "javascript-play",
+  "private": true,
+  "author": "Pablo Rosales me@pablorosales.xyz",
+  "devDependencies": {
+    "static-server": "^2.0.0"
+  },
+  "scripts": {
+    "server": "static-server ."
+  }
+}
