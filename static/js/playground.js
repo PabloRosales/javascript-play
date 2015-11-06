@@ -13,8 +13,7 @@
     }
 
     function code(text) {
-        var type = R.contains('\n', text) ? 'pre' : 'code';
-        return $("<" + type + ">").text(text);
+        return $("<pre>").text(text);
     }
 
     function result(text) {
@@ -60,7 +59,7 @@
                 $elem.append(r);
             }, data);
         });
-        $('pre,code').each(function(i, block) {
+        $('pre').each(function(__, block) {
             hljs.highlightBlock(block);
         });
         $('.eval').click(run);
