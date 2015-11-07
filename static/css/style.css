@@ -22,3 +22,11 @@ pre {
 .no-top-border {
     border: none !important;
 }
+.CodeMirror {
+    height: auto;
+    font-size: 13px;
+}
+
+textarea.code {
+    display: none;
+}

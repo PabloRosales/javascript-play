@@ -1,71 +1,79 @@
-(function($, R, hljs, window) {
+(function($, CodeMirror, window) {
 
-    var P = {};
+    CodeMirror.defaults.theme = 'material';
+    CodeMirror.defaults.tabSize = 4;
+    CodeMirror.defaults.lineNumbers = true;
 
-    hljs.initHighlightingOnLoad();
-
-    function row() {
-        return $("<div class='row'>");
+    function log(data) {
+        console.log(data);
     }
 
-    function col(size, content, classes) {
-        return $("<div class='col-md-" + size + "'>").addClass(classes).html(content);
-    }
-
-    function code(text) {
-        return $("<pre>").text(text);
-    }
-
-    function result(text) {
-        return code(text + '');
-    }
-
-    function comment(html) {
-        return $("<small class='text-muted'>").html(html);
-    }
-
-    function run(e) {
-        var $this = $(this);
-        var r = $this.parent().parent().find('code,pre').eq(1);
-        var actual_result = window.eval(R.replace('\n', ' ', $this.parent().parent().find('code,pre').eq(0).text()));
-        var written_result = window.eval(R.replace('\n', ' ', r.text()));
-        if (actual_result === written_result) {
-            r.css('font-weight', 'bold');
-            console.log(written_result + ' === ' + actual_result);
+    function clear() {
+        if (console.clear) {
+            console.clear();
         }
-        else {
-            r.css('text-decoration', 'line-through');
-            console.log('ERROR: ' + written_result + ' !== ' + actual_result)
-        }
-        e.preventDefault();
     }
 
-    P.render = function($elem, data) {
-        if ($elem.length <= 0) { return $elem; }
-        $elem.each(function() {
-            $elem.append(
-                row()
-                    .append(col(1, ''))
-                    .append(col(6, 'CODE'))
-                    .append(col(2, 'RESULT'))
-                    .append(col(2, 'COMMENTS'))
-            );
-            R.forEach(function(value) {
-                var r = row()
-                    .append(col(1, $('<a href="#" class="eval" title="See console">').text('eval'), 'text-right'))
-                    .append(col(6, code(value[0])))
-                    .append(col(2, result(value[1])))
-                    .append(col(2, comment(value[2])));
-                $elem.append(r);
-            }, data);
-        });
-        $('pre').each(function(__, block) {
-            hljs.highlightBlock(block);
-        });
-        $('.eval').click(run);
-        return $elem;
+    function createRun($elem) {
+        return function(e) {
+            clear();
+            e.preventDefault();
+            window.eval($elem.val());
+        }
+    }
+
+    window.snippet = function snippet(name) {
+        $.get(name + '.js', function(data) {
+            var ta = $('#' + name).val(data);
+            CodeMirror.fromTextArea(document.getElementById(name), { mode: ta.data('lang')});
+            $('a.' + name).click(createRun(ta)).trigger('click');
+        }, 'text');
     };
 
-    window.P = P;
+    window.strictEqual = function strictEqual(v1, v2, message) {
+        if (v1 === v2) {
+            log('[SUCCESS ...] ' + v1 + ' === ' + v2 + ' ');
+            log('[SUCCESS   ^] ' + message);
+        }
+        else {
+            log('[ERROR ...] ' + v1 + ' and ' + v2 + ' are not equal!');
+            log('[ERROR   ^] ' + message);
+        }
+        console.log('');
+    };
 
-}(jQuery, R, hljs, window));
+    window.strictNotEqual = function strictEqual(v1, v2, message) {
+        if (v1 !== v2) {
+            log('[SUCCESS ...] ' + v1 + ' !== ' + v2 + ' ');
+            log('[SUCCESS   ^] ' + message);
+        }
+        else {
+            log('[ERROR ...] ' + v1 + ' and ' + v2 + ' are equal!');
+            log('[ERROR   ^] for: ' + message);
+        }
+        console.log('');
+    };
+
+    window.throws = function throws(fn, regex, message) {
+
+        var actual;
+
+        try {
+            fn();
+        }
+        catch (e) {
+            actual = e;
+        }
+
+        if (actual && (regex.test(actual.name) || regex.test(actual.message))) {
+            log('[SUCCESS ...] Did raise the expected exception: ' + regex);
+            log('[SUCCESS   ^] ' + message);
+        }
+        else {
+            log('[ERROR ...] Did not raise the expected exception: ' + regex);
+            log('[ERROR   ^] for: ' + message);
+        }
+
+    }
+
+}(jQuery, CodeMirror, window));
