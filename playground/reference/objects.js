@@ -44,7 +44,9 @@ let Pet = function() {};
 Pet.prototype = new Animal();
 Pet.prototype.isPet = function() { return true; };
 
-let Dog = function() {};
+let Dog = function() {
+    this.type = 'dog';
+};
 Dog.prototype = new Pet();
 Dog.prototype.isDog = function() { return true; };
 
@@ -54,6 +56,8 @@ strictEqual('isAnimal' in dog, true, 'Has implicit references for values of its 
 strictEqual('isPet' in dog, true, 'Has implicit references for values of its prototype chain (Pet)');
 strictEqual('isDog' in dog, true, 'Has implicit references for values of its prototype chain (Dog)');
 strictEqual(dog.hasOwnProperty('isDog'), false, 'hasOwnProperty does not check on the prototype chain (Dog)');
+strictEqual(dog.hasOwnProperty('type'), true, 'hasOwnProperty checks for properties on the object');
+strictEqual(dog.type, 'dog', 'Our property is on the dog object only');
 
 Dog.isDog = function() { return false; };
 strictEqual(dog.isDog(), true, 'We did not change the actual prototype function');
