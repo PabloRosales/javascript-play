@@ -7,5 +7,8 @@
   },
   "scripts": {
     "server": "static-server ."
+  },
+  "dependencies": {
+    "babel-core": "^5.8.33"
   }
 }

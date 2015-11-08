@@ -22,11 +22,27 @@
         }
     }
 
+    function createRun6($elem) {
+        return function(e) {
+            clear();
+            e.preventDefault();
+            babel.run($elem.val());
+        }
+    }
+
     window.snippet = function snippet(name) {
         $.get(name + '.js', function(data) {
             var ta = $('#' + name).val(data);
             CodeMirror.fromTextArea(document.getElementById(name), { mode: ta.data('lang')});
             $('a.' + name).click(createRun(ta)).trigger('click');
+        }, 'text');
+    };
+
+    window.snippet6 = function snippet6(name) {
+        $.get(name + '.js', function(data) {
+            var ta = $('#' + name).val(data);
+            CodeMirror.fromTextArea(document.getElementById(name), { mode: ta.data('lang')});
+            $('a.' + name).click(createRun6(ta)).trigger('click');
         }, 'text');
     };
 
