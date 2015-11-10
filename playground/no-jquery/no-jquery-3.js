@@ -1,53 +1,49 @@
-test('No JQuery #3 (get item)', function() {
+// JQuery -----------------------------------------
 
-    // JQuery -----------------------------------------
+var jqItems = $('.list-item');
 
-    var jq_items = $('.list-item');
+// First item
 
-    // First item
-    var jq_first = jq_items.first();
-    var jq_first_1 = jq_items.eq(0);
-    var jq_first_2 = jq_items.get(0);
-    var jq_first_3 = jq_items[0];
+// Already wrapped
+var jqFirst = jqItems.first();
+var jqFirst1 = jqItems.eq(0);
+strictEqual(jqFirst.text(), 'First item', '.first()');
+strictEqual(jqFirst1.text(), 'First item', '.eq(0)');
 
-    // Already wrapped
-    ok(jq_first.text() === 'First item');
-    ok(jq_first_1.text() === 'First item');
+// Not wrapped
+var jqFirst2 = jqItems.get(0);
+var jqFirst3 = jqItems[0];
+strictEqual($(jqFirst2).text(), 'First item', '.get(0)');
+strictEqual($(jqFirst3).text(), 'First item', 'list[0]');
 
-    // Not wrapped
-    ok($(jq_first_2).text() === 'First item');
-    ok($(jq_first_3).text() === 'First item');
+// Last item
 
-    // Last item
-    var jq_last = jq_items.last();
-    var jq_last_1 = jq_items.eq(-1);
-    var jq_last_2 = jq_items.get(-1);
-    var jq_last_3 = jq_items[jq_items.length - 1];
+// Already wrapped
+var jqLast = jqItems.last();
+var jqLast1 = jqItems.eq(-1);
+strictEqual(jqLast.text(), 'Third item', '.last()');
+strictEqual(jqLast1.text(), 'Third item', '.eq(-1)');
 
-    // Already wrapped
-    ok(jq_last.text() === 'Third item');
-    ok(jq_last_1.text() === 'Third item');
+// Not wrapped
+var jqLast2 = jqItems.get(-1);
+var jqLast3 = jqItems[jqItems.length - 1];
+strictEqual($(jqLast2).text(), 'Third item', '.get(-1)');
+strictEqual($(jqLast3).text(), 'Third item', 'list[list.length - 1]');
 
-    // Not wrapped
-    ok($(jq_last_2).text() === 'Third item');
-    ok($(jq_last_3).text() === 'Third item');
+// No JQuery --------------------------------------
 
-    // No JQuery --------------------------------------
+var items = document.querySelectorAll('.list-item');
 
-    var items = document.querySelectorAll('.list-item');
+// First item
+var first = document.querySelector('.list-item');
+var first1 = items.item(0);
+var first2 = items[0];
 
-    // First item
-    var first = document.querySelector('.list-item');
-    var first_1 = items.item(0);
-    var first_2 = items[0];
+strictEqual(first.textContent, 'First item', 'querySelector');
+strictEqual(first1.textContent, 'First item', '.item(0)');
+strictEqual(first2.textContent, 'First item', 'list[0]');
 
-    ok(first.textContent === 'First item');
-    ok(first_1.textContent === 'First item');
-    ok(first_2.textContent === 'First item');
+// Last item
+var last = items[items.length - 1];
 
-    // Last item
-    var last = items[items.length - 1];
-
-    ok(last.textContent === 'Third item');
-
-});
+strictEqual(last.textContent, 'Third item', 'items[items.length - 1]');
