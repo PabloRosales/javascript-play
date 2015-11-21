@@ -64,5 +64,3 @@ strictEqual(dog.isDog(), true, 'We did not change the actual prototype function'
 
 Dog.prototype.isDog = function() { return false; };
 strictEqual(dog.isDog(), false, 'We did change now the actual prototype function');
-
-// to be continue...
