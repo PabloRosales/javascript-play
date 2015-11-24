@@ -9,7 +9,7 @@ function hello() {
 function notHoisted() { bye(); }
 throws(notHoisted, /TypeError/, 'Since our bye function was defined with var the value of bye is hoisted and undefined.');
 
-// Functions defined with var don't get hoisted
+// bye is hoisted to top, with value undefined, but assignment of the function is done here
 var bye = function() {
     return 'Bye!';
 };
