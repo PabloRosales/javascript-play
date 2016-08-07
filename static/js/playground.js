@@ -5,10 +5,17 @@
     CodeMirror.defaults.lineNumbers = true;
 
     function log(data) {
+        if (data === '') {
+            $('div.log').append($('<br />'));
+        } else {
+            var code = $('<code>').html(data.split(' ').join('&nbsp;'));
+            $('div.log').append(code).append($('<br />'));
+        }
         console.log(data);
     }
 
     function clear() {
+        $('div.log').empty();
         if (console.clear) {
             console.clear();
         }
@@ -33,7 +40,7 @@
     window.snippet = function snippet(name) {
         $.get(name + '.js', function(data) {
             var ta = $('#' + name).val(data);
-            CodeMirror.fromTextArea(document.getElementById(name), { mode: ta.data('lang')});
+            CodeMirror.fromTextArea(document.getElementById(name), { mode: ta.data('lang'), readOnly: true });
             $('a.' + name).click(createRun(ta)).trigger('click');
         }, 'text');
     };
@@ -41,7 +48,7 @@
     window.snippet6 = function snippet6(name) {
         $.get(name + '.js', function(data) {
             var ta = $('#' + name).val(data);
-            CodeMirror.fromTextArea(document.getElementById(name), { mode: ta.data('lang')});
+            CodeMirror.fromTextArea(document.getElementById(name), { mode: ta.data('lang'), readOnly: true });
             $('a.' + name).click(createRun6(ta)).trigger('click');
         }, 'text');
     };
@@ -55,7 +62,7 @@
             log('[ERROR ...] ' + v1 + ' and ' + v2 + ' are not equal!');
             log('[ERROR   ^] ' + message);
         }
-        console.log('');
+        log('');
     };
 
     window.strictNotEqual = function strictEqual(v1, v2, message) {
@@ -67,7 +74,7 @@
             log('[ERROR ...] ' + v1 + ' and ' + v2 + ' are equal!');
             log('[ERROR   ^] for: ' + message);
         }
-        console.log('');
+        log('');
     };
 
     window.throws = function throws(fn, regex, message) {
@@ -89,6 +96,8 @@
             log('[ERROR ...] Did not raise the expected exception: ' + regex);
             log('[ERROR   ^] for: ' + message);
         }
+
+        log('');
 
     }
 
