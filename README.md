@@ -1,7 +1,7 @@
 Javascript Play
 ===============
 
-Checkout the [live code](https://pablorosales.github.io/javascript-play).
+Checkout the [live code](https://code.pablorosales.xyz/javascript-play).
 
 Code snippets showing different things related to Javascript, most of the things are from book readings, blog posts,
 ideas and some are just me playing with Javascript.
